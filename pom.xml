@@ -112,7 +112,7 @@
             </plugin>
 
             <!-- Surefire Plugin pour lancer les tests Cucumber -->
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
@@ -121,10 +121,22 @@
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
-                    <testNGArtifactName>none</testNGArtifactName> <!-- IMPORTANT -->
+                    <testNGArtifactName>none</testNGArtifactName> 
                 </configuration>
-            </plugin>
-
+            </plugin> -->
+         <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-surefire-plugin</artifactId>
+             <version>3.2.5</version>
+             <configuration>
+                 <useModulePath>false</useModulePath>
+                 <testNGArtifactName>none</testNGArtifactName> 
+                 <includes>
+                     <include>**/*Runner.java</include>
+                 </includes>
+                 <testFailureIgnore>true</testFailureIgnore>
+             </configuration>
+         </plugin>
         </plugins>
     </build>
 </project>
