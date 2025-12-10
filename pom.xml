@@ -1,147 +1,53 @@
+6,2s
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>wassim</groupId>
+  <artifactId>AutomationPageObject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Archetype - AutomationPageObject</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>4.12</version>
+<scope>test</scope>
+</dependency>
+<dependency>
+<groupId>io.cucumber</groupId>
+<artifactId>cucumber-junit</artifactId>
+<version>7.9.0</version>
+<scope>test</scope>
+</dependency>
 
-    <groupId>wassim</groupId>
-    <artifactId>AutomationPageObject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>AutomationPageObject</name>
-    <url>http://www.example.com</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version> <!-- Change en 21 si ton agent Jenkins utilise Java 21 -->
-        <maven.compiler.release>${java.version}</maven.compiler.release>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-
-        <!-- Versions à jour en décembre 2025 -->
-        <cucumber.version>7.20.1</cucumber.version>
-        <selenium.version>4.27.0</selenium.version>
-        <webdrivermanager.version>5.9.2</webdrivermanager.version>
-        <lombok.version>1.18.36</lombok.version> <!-- Version stable + compatible Java 17/21/24 sans workaround -->
-        <extentreports.adapter.version>1.14.0</extentreports.adapter.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-bom</artifactId>
-                <version>${cucumber.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <!-- Lombok (obligatoire pour @Data, @Getter, etc.) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Cucumber -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- JUnit 5 (recommandé en 2025, remplace JUnit 4 et TestNG) -->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Selenium + WebDriverManager -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- ExtentReports Cucumber 7 Adapter -->
-        <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber7-adapter</artifactId>
-            <version>${extentreports.adapter.version}</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Compiler plugin avec le fix Lombok Java 17+ (au cas où tu gardes une ancienne version de Lombok) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <release>${java.version}</release>
-                    <compilerArgs>
-                        <!-- Ce flag n'est PLUS nécessaire avec Lombok 1.18.34+, mais il ne fait aucun mal -->
-                        <arg>--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-
-            <!-- Surefire pour exécuter les tests Cucumber + JUnit 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>4</threadCount>
-                    <includes>
-                        <include>**/CucumberTestRunner.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <!-- Plugin Cucumber Reports (optionnel mais pratique sur Jenkins) -->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.8.2</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>AutomationPageObject</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+<!-- https://mvnrepository.com/artifact/org.testng/testng --> <dependency>
+         <groupId>org.testng</groupId> <artifactId>testng</artifactId> 
+         <version>6.8.8</version> 
+</dependency> 
+           <dependency>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>cucumber-java</artifactId>
+                    <version>7.9.0</version>
+           </dependency>
+           <!--https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
+           <dependency>
+                    <groupId>tech.grasshopper</groupId>
+                    <artifactId>extentreports-cucumber7-adapter</artifactId> <version>1.9.2</version>
+           </dependency> <dependency> <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                    <version>4.33.0</version>
+           </dependency> <dependency> 
+                    <groupId>io.github.bonigarcia</groupId>
+                    <artifactId>webdrivermanager</artifactId>
+                    <version>5.5.3</version>
+                    <scope>test</scope>
+           </dependency>
+  </dependencies>
 </project>
