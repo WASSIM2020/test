@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
         "pretty",
         "html:target/cucumber-report.html",
         "json:target/cucumber.json",
-        "junit:target/cucumber.xml"
+        "junit:target/cucumber-report.xml"
         //"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
     }
 )
