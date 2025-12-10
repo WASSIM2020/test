@@ -6,8 +6,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-   // tags = "@Ajoutproduit",                     // ← sans espace devant !
-    features = "src/test/features/Sprint1/",
+    tags = "@Ajoutproduit",                     // ← sans espace devant !
+    features = "src/test/features/Sprint2/",
     glue = {"hooks", "stepDefinition"},
     publish = true,
     plugin = {
