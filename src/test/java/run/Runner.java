@@ -14,8 +14,8 @@ import io.cucumber.junit.CucumberOptions;
         "pretty",
         "html:target/cucumber-report.html",
         "json:target/cucumber.json",
-        "junit:target/cucumber.xml",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        "junit:target/cucumber.xml"
+        //"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
     }
 )
 public class Runner {
