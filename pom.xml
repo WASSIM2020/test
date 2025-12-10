@@ -50,11 +50,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!-- <dependency>
             <groupId>tech.grasshopper</groupId>
             <artifactId>extentreports-cucumber7-adapter</artifactId>
             <version>1.14.0</version>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
